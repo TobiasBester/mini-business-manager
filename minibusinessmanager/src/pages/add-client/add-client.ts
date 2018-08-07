@@ -1,9 +1,8 @@
-import { AddClientPage } from './../add-client/add-client';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 /**
- * Generated class for the ClientsPage page.
+ * Generated class for the AddClientPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
@@ -11,21 +10,16 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 @IonicPage()
 @Component({
-  selector: 'page-clients',
-  templateUrl: 'clients.html',
+  selector: 'page-add-client',
+  templateUrl: 'add-client.html',
 })
-export class ClientsPage {
+export class AddClientPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad ClientsPage');
-  }
-
-  goToAddClient(event) {
-    // console.log("Going to Add Client");
-    this.navCtrl.push(AddClientPage);
+    console.log('ionViewDidLoad AddClientPage');
   }
 
 }
