@@ -6,13 +6,52 @@
 -->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>AddClient</ion-title>
-  </ion-navbar>
+  <ion-toolbar>
+    <ion-title>Add New Client</ion-title>
+    <ion-buttons icon-only ion-button end>
+      <ion-icon name="checkmark"></ion-icon>
+    </ion-buttons>
+  </ion-toolbar>
 
 </ion-header>
 
-
 <ion-content padding>
-
+  <button ion-button block outline>Import From Contacts</button>
+  <ion-list>
+    <ion-item>
+      <ion-label color="primary">Full Name *</ion-label>
+      <ion-input placeholder="Joe Schmoe"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label color="primary">Cell Number *</ion-label>
+      <ion-input placeholder="01233456789"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label color="primary">Alternate Number</ion-label>
+      <ion-input placeholder="0123456789"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label color="primary">Source of Contact *</ion-label>
+      <ion-select>
+        <ion-option>Facebook</ion-option>
+        <ion-option>Twitter</ion-option>
+        <ion-option>Web Advert</ion-option>
+        <ion-option>Word of Mouth</ion-option>
+        <ion-option>Pamphlet</ion-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label>Address</ion-label>
+      <ion-textarea placeholder="123 Ark Street"></ion-textarea>
+    </ion-item>
+    <ion-item>
+      <p>Google Maps Location</p>
+      <button ion-button icon-only outline>
+        <ion-icon name="locate"></ion-icon>
+      </button>
+    </ion-item>
+  </ion-list>
+  <button ion-button block outline>
+    Confirm
+  </button>
 </ion-content>
