@@ -12,8 +12,8 @@ export class ClientsPage implements OnInit {
   ngOnInit() {
   }
 
-  goToAddClient() {
-    console.log('Going to Add Client');
+  addClient() {
+    console.log('Added CLient');
   }
 
 }

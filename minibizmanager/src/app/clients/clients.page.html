@@ -15,19 +15,13 @@
       </p>
     </ion-card-content>
   </ion-card>
-  <ion-card class="allorders">
+  <ion-card class="allorders" (click)="addClient()">
     <ion-card-content>
       <ion-card-title>
         All Clients
-        <button ion-button outline>Sort</button>
-        <button ion-button outline (click)="goToAddClient()">+</button>
       </ion-card-title>
       <ion-list>
         <p>Tap on a client to view details</p>
-        <button ion-item>
-          <p item-start>Client Name</p>
-          <p item-end>Client Cell Number</p>
-        </button>
       </ion-list>
     </ion-card-content>
   </ion-card>
