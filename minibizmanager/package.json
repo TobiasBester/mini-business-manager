@@ -26,8 +26,9 @@
     "@ionic/angular": "^4.0.0-beta.0",
     "@ionic/ng-toolkit": "^1.0.0",
     "@ionic/schematics-angular": "^1.0.0",
-    "ionicons": "4.3.0",
     "core-js": "^2.5.3",
+    "hoek": "^5.0.4",
+    "ionicons": "4.3.0",
     "rxjs": "6.2.2",
     "zone.js": "^0.8.26"
   },
