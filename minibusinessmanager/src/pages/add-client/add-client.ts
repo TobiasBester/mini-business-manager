@@ -1,7 +1,9 @@
+import { Contacts } from '@ionic-native/contacts';
 import { FirebaseProvider } from './../../providers/firebase/firebase';
 import { Component } from '@angular/core';
-import { NavController, NavParams, IonicPage } from 'ionic-angular';
+import { NavController, NavParams, ToastController, Platform } from 'ionic-angular';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
+import { LoadingController } from 'ionic-angular';
 // import { AngularFirestore } from 'angularfire2/firestore';
 // import { Client } from '../clients/clientObject';
 
@@ -12,7 +14,6 @@ import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms'
  * Ionic pages and navigation.
  */
 
-@IonicPage()
 @Component({
   selector: 'page-add-client',
   templateUrl: 'add-client.html',
@@ -29,9 +30,19 @@ export class AddClientPage {
     'Other'
   ];
   public defaultContactSource = 'Facebook';
+  public loader = this.loadingController.create({
+    content: 'Adding Client...',
+    spinner: 'crescent'
+  });
+  public toast = this.toastController.create({
+    message: 'Client was added successfully!',
+    duration: 2000
+  });
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private formBuilder: FormBuilder, /* public db: AngularFirestore,
-  */ public firebaseProvider: FirebaseProvider ) {
+  constructor(public platform: Platform, public navCtrl: NavController, public navParams: NavParams, private formBuilder: FormBuilder, 
+    public firebaseProvider: FirebaseProvider, public loadingController: LoadingController, public toastController: ToastController,
+    public contacts: Contacts ) {
+    
     this.addClientForm = this.formBuilder.group({
       fullName: new FormControl('', Validators.compose([
         Validators.maxLength(30),
@@ -64,6 +75,7 @@ export class AddClientPage {
 
   submitNewClientForm() {
     console.log('Form Valid!');
+    this.loader.present();
     
     const client = {
       fullName: this.addClientForm.controls['fullName'].value,
@@ -76,10 +88,30 @@ export class AddClientPage {
     this.firebaseProvider.addClient(client)
     .then((response) => {
       console.log('Added Client:\n' + response);
+      this.loader.dismiss();
+      this.toast.present();
       this.addClientForm.reset();
     }, (error) => {
       console.log('Client not added!\n' + error);
     })
+  }
+
+  importClient() {
+    console.log('Importing Client');
+
+    this.contacts.pickContact()
+      .then((contact) => {
+        console.log('The following contact has been picked: ' + JSON.stringify(contact));
+      },
+      (error) => {
+        console.log('Error:\n' + error);
+    });
+    
+  }
+
+  goBack() {
+    console.log('POP');
+    this.navCtrl.pop();
   }
 
 }
