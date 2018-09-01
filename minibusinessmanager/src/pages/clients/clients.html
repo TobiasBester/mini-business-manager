@@ -33,9 +33,10 @@
       <ion-list>
         <p>Tap on a client to view details</p>
         <button ion-item>
-          <p item-start>Client Name</p>
+          <p item-start>Client Full Name</p>
           <p item-end>Client Cell Number</p>
         </button>
+        <ion-item *ngFor="let client of clients | async">{{ client.fullName }}</ion-item>
       </ion-list>
     </ion-card-content>
   </ion-card>

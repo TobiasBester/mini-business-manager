@@ -1,6 +1,8 @@
+import { FirebaseProvider } from './../../providers/firebase/firebase';
 import { AddClientPage } from './../add-client/add-client';
 import { Component } from '@angular/core';
 import { NavController, NavParams, IonicPage } from 'ionic-angular';
+import { Observable } from 'rxjs';
 
 /**
  * Generated class for the ClientsPage page.
@@ -15,11 +17,21 @@ import { NavController, NavParams, IonicPage } from 'ionic-angular';
 })
 export class ClientsPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  clients: Observable<any[]>;
+  clientObjects: {}[];
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, public fb: FirebaseProvider) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ClientsPage');
+    this.clients = this.fb.getClients();
+    this.clients.subscribe((data) => {
+      console.log(data);
+      // this.clientObjects = data;
+    }, (error) => {
+      console.log('Error: ' + error);
+    });
   }
 
   goToAddClient(event) {

@@ -27,8 +27,11 @@ export class FirebaseProvider {
         console.log(error);
         reject(error);
       });
-    });
-    
+    });  
+  }
+
+  getClients() {
+    return this.db.collection('clients').valueChanges();
   }
 
 }
