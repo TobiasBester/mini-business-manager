@@ -1,7 +1,0 @@
-{
-  "name": "minibizmanager",
-  "integrations": {
-    "cordova": {}
-  },
-  "type": "angular"
-}
