@@ -27,6 +27,7 @@
     <ion-card-content>
       <ion-card-title>
         All Clients
+        <h2>Num Clients: {{ numClients }}</h2>
         <button ion-button outline>Sort</button>
         <button ion-button outline (click)="goToAddClient($event)">+</button>
       </ion-card-title>
@@ -34,9 +35,8 @@
         <p>Tap on a client to view details</p>
         <button ion-item>
           <p item-start>Client Full Name</p>
-          <p item-end>Client Cell Number</p>
         </button>
-        <ion-item *ngFor="let client of clients | async">{{ client.fullName }}</ion-item>
+        <ion-item (click)="goToClientPage(client)" *ngFor="let client of clients | async">{{ client.fullName }}</ion-item>
       </ion-list>
     </ion-card-content>
   </ion-card>
