@@ -23,19 +23,22 @@
       </p>
     </ion-card-content>
   </ion-card>
-  <ion-card class="allorders">
+  <ion-card class="allclients">
     <ion-card-content>
       <ion-card-title>
-        All Clients
-        <h2>Num Clients: {{ numClients }}</h2>
-        <button ion-button outline>Sort</button>
-        <button ion-button outline (click)="goToAddClient($event)">+</button>
+        All Clients <span class="allclients_numclients">{{ numClients }}</span>
       </ion-card-title>
-      <ion-list>
+      <button ion-button icon-end outline>
+        Sort
+        <ion-icon name="funnel"></ion-icon>
+      </button>
+      <button ion-button icon-end outline (click)="goToAddClient($event)">
+        Add Client
+        <ion-icon name="person-add"></ion-icon>
+      </button>
+      <br>
+      <ion-list class="allclients_clientlist">
         <p>Tap on a client to view details</p>
-        <button ion-item>
-          <p item-start>Client Full Name</p>
-        </button>
         <ion-item (click)="goToClientPage(client)" *ngFor="let client of clients | async">{{ client.fullName }}</ion-item>
       </ion-list>
     </ion-card-content>

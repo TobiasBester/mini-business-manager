@@ -1,21 +1,27 @@
-import { ClientObject } from "../clients/clientObject"
-import { AngularFirestore } from "angularfire2/firestore";
+import { Client } from "../clients/clientObject"
+import { AngularFirestore, AngularFirestoreDocument, AngularFirestoreCollection } from "angularfire2/firestore";
+import { Observable } from "rx";
+
 
 export class ClientList {
-    private listOfClients: ClientObject[] = [];
+    private listOfClients: Client[] = [];
+    private clientCollection: AngularFirestoreCollection<Client>;
+    private clientsData: any;
     
     constructor(public db: AngularFirestore) {
+        this.clientCollection = db.collection<Client>('clients');
+        this.clientsData = this.clientCollection.valueChanges();
     }
 
-    public getClientObjects(): ClientObject[] {
+    public getClientObjects(): Client[] {
         return this.listOfClients;
     };
 
-    public addClient(co: ClientObject) {
-        this.listOfClients.push(co);
+    public addClient(c: Client) {
+        this.listOfClients.push(c);
 
         return new Promise<any>((resolve, reject) => {
-            this.db.collection('clients').add(co.getObject())
+            this.clientCollection.add(c)
             .then((response) => {
               console.log('Firebase Provider: Add Client Response\n' + response);
               resolve(response);
@@ -28,6 +34,11 @@ export class ClientList {
     }
 
     public getClientListData() {
-        return this.db.collection('clients').valueChanges();
+
+        return this.clientsData;
+    }
+
+    public removeClient(client) {
+
     }
 }

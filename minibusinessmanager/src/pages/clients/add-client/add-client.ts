@@ -5,7 +5,7 @@ import { NavController, NavParams, ToastController, Platform } from 'ionic-angul
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { LoadingController } from 'ionic-angular';
 // import { AngularFirestore } from 'angularfire2/firestore';
-import { ClientObject } from '../../clients/clientObject';
+import { Client } from '../../clients/clientObject';
 import { ClientList } from '../clientList';
 import { AngularFirestore } from 'angularfire2/firestore';
 
@@ -78,16 +78,15 @@ export class AddClientPage {
   submitNewClientForm() {
     console.log('Form Valid!');
     this.loader.present();
-    
-    const client = [];
-    client['fullName'] = this.addClientForm.controls['fullName'].value;
-    client['primaryNumber'] = this.addClientForm.controls['primaryNumber'].value;
-    client['altNumber'] = this.addClientForm.controls['altNumber'].value;
-    client['contactSource'] = this.addClientForm.controls['contactSource'].value;
-    client['address'] = this.addClientForm.controls['address'].value;
 
-    const newClientObject: ClientObject = new ClientObject(client);
-    this.clientList.addClient(newClientObject)
+    const newClient: Client = {
+      fullName: this.addClientForm.controls['fullName'].value,
+      primaryNumber: this.addClientForm.controls['primaryNumber'].value,
+      altNumber: this.addClientForm.controls['altNumber'].value,
+      contactSource: this.addClientForm.controls['contactSource'].value,
+      address: this.addClientForm.controls['address'].value
+    };
+    this.clientList.addClient(newClient)
       .then((response) => {
         console.log('Added Client:\n' + response);
         this.loader.dismiss();
@@ -112,7 +111,6 @@ export class AddClientPage {
   }
 
   goBack() {
-    console.log('POP');
     this.navCtrl.pop();
   }
 

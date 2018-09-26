@@ -17,6 +17,7 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { FirebaseProvider } from '../providers/firebase/firebase';
 import { Contacts } from '@ionic-native/contacts';
+import { SingleClientPage } from '../pages/clients/single-client/single-client';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { Contacts } from '@ionic-native/contacts';
     TabsPage,
     ClientsPage,
     OrdersPage,
-    AddClientPage
+    AddClientPage,
+    SingleClientPage
   ],
   imports: [
     BrowserModule,
@@ -40,7 +42,8 @@ import { Contacts } from '@ionic-native/contacts';
     TabsPage,
     ClientsPage,
     OrdersPage,
-    AddClientPage
+    AddClientPage,
+    SingleClientPage
   ],
   providers: [
     StatusBar,

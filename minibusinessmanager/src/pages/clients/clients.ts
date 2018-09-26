@@ -4,6 +4,7 @@ import { NavController, NavParams, IonicPage, LoadingController } from 'ionic-an
 import { Observable } from 'rxjs';
 import { ClientList } from './clientList';
 import { AngularFirestore } from 'angularfire2/firestore';
+import { SingleClientPage } from './single-client/single-client';
 
 /**
  * Generated class for the ClientsPage page.
@@ -35,7 +36,6 @@ export class ClientsPage {
     this.loader.present();
     this.clients = this.clientList.getClientListData();
     this.clients.subscribe((data) => {
-      console.log(data);
       this.numClients = data.length
       this.loader.dismiss();
     }, (error) => {
@@ -49,7 +49,7 @@ export class ClientsPage {
   }
 
   goToClientPage(selectedClient) {
-    console.log('Clicked on ' + selectedClient.fullName);
+    this.navCtrl.push(SingleClientPage, { client: selectedClient });
   }
 
 }
