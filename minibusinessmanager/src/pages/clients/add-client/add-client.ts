@@ -1,11 +1,13 @@
 import { Contacts } from '@ionic-native/contacts';
-import { FirebaseProvider } from './../../providers/firebase/firebase';
+import { FirebaseProvider } from './../../../providers/firebase/firebase';
 import { Component } from '@angular/core';
 import { NavController, NavParams, ToastController, Platform } from 'ionic-angular';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { LoadingController } from 'ionic-angular';
 // import { AngularFirestore } from 'angularfire2/firestore';
-// import { Client } from '../clients/clientObject';
+import { ClientObject } from '../../clients/clientObject';
+import { ClientList } from '../clientList';
+import { AngularFirestore } from 'angularfire2/firestore';
 
 /**
  * Generated class for the AddClientPage page.
@@ -16,7 +18,7 @@ import { LoadingController } from 'ionic-angular';
 
 @Component({
   selector: 'page-add-client',
-  templateUrl: 'add-client.html',
+  templateUrl: 'add-client.html'
 })
 export class AddClientPage {
 
@@ -38,10 +40,11 @@ export class AddClientPage {
     message: 'Client was added successfully!',
     duration: 2000
   });
+  public clientList: ClientList = new ClientList(this.db);
 
-  constructor(public platform: Platform, public navCtrl: NavController, public navParams: NavParams, private formBuilder: FormBuilder, 
-    public firebaseProvider: FirebaseProvider, public loadingController: LoadingController, public toastController: ToastController,
-    public contacts: Contacts ) {
+  constructor(public platform: Platform, public navCtrl: NavController, public navParams: NavParams,
+     private formBuilder: FormBuilder, public firebaseProvider: FirebaseProvider, public loadingController: LoadingController, 
+     public toastController: ToastController, public contacts: Contacts, public db: AngularFirestore) {
     
     this.addClientForm = this.formBuilder.group({
       fullName: new FormControl('', Validators.compose([
@@ -57,8 +60,7 @@ export class AddClientPage {
       ])),
       altNumber: new FormControl('', Validators.compose([
         Validators.minLength(10),
-        Validators.maxLength(10),
-        Validators.required
+        Validators.maxLength(10)
       ])),
       contactSource: new FormControl(null),
       address: new FormControl('', Validators.compose([
@@ -77,23 +79,23 @@ export class AddClientPage {
     console.log('Form Valid!');
     this.loader.present();
     
-    const client = {
-      fullName: this.addClientForm.controls['fullName'].value,
-      primaryNumber: this.addClientForm.controls['primaryNumber'].value,
-      altNumber: this.addClientForm.controls['altNumber'].value,
-      contactSource: this.addClientForm.controls['contactSource'].value,
-      address: this.addClientForm.controls['address'].value
-    };
+    const client = [];
+    client['fullName'] = this.addClientForm.controls['fullName'].value;
+    client['primaryNumber'] = this.addClientForm.controls['primaryNumber'].value;
+    client['altNumber'] = this.addClientForm.controls['altNumber'].value;
+    client['contactSource'] = this.addClientForm.controls['contactSource'].value;
+    client['address'] = this.addClientForm.controls['address'].value;
 
-    this.firebaseProvider.addClient(client)
-    .then((response) => {
-      console.log('Added Client:\n' + response);
-      this.loader.dismiss();
-      this.toast.present();
-      this.addClientForm.reset();
-    }, (error) => {
-      console.log('Client not added!\n' + error);
-    })
+    const newClientObject: ClientObject = new ClientObject(client);
+    this.clientList.addClient(newClientObject)
+      .then((response) => {
+        console.log('Added Client:\n' + response);
+        this.loader.dismiss();
+        this.toast.present();
+        this.addClientForm.reset();
+      }, (error) => {
+        console.log('Client not added!\n' + error);
+      });
   }
 
   importClient() {

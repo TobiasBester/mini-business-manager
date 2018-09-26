@@ -1,4 +1,4 @@
-import { AddClientPage } from './../pages/add-client/add-client';
+import { AddClientPage } from './../pages/clients/add-client/add-client';
 import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
