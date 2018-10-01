@@ -28,11 +28,11 @@
       <ion-card-title>
         All Clients <span class="allclients_numclients">{{ numClients }}</span>
       </ion-card-title>
-      <button ion-button icon-end outline>
+      <button ion-button icon-end outline (click)="sortList()">
         Sort
         <ion-icon name="funnel"></ion-icon>
       </button>
-      <button ion-button icon-end outline (click)="goToAddClient($event)">
+      <button ion-button icon-end outline (click)="goToAddClient()">
         Add Client
         <ion-icon name="person-add"></ion-icon>
       </button>

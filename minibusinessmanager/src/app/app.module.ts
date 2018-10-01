@@ -18,6 +18,9 @@ import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { FirebaseProvider } from '../providers/firebase/firebase';
 import { Contacts } from '@ionic-native/contacts';
 import { SingleClientPage } from '../pages/clients/single-client/single-client';
+import { DishesPage } from '../pages/dishes/dishes';
+import { AddDishPage } from '../pages/dishes/add-dish/add-dish';
+import { DishListProvider } from '../pages/dishes/dish-list';
 
 @NgModule({
   declarations: [
@@ -27,7 +30,9 @@ import { SingleClientPage } from '../pages/clients/single-client/single-client';
     ClientsPage,
     OrdersPage,
     AddClientPage,
-    SingleClientPage
+    SingleClientPage,
+    DishesPage,
+    AddDishPage
   ],
   imports: [
     BrowserModule,
@@ -43,14 +48,17 @@ import { SingleClientPage } from '../pages/clients/single-client/single-client';
     ClientsPage,
     OrdersPage,
     AddClientPage,
-    SingleClientPage
+    SingleClientPage,
+    DishesPage,
+    AddDishPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     FirebaseProvider,
-    Contacts
+    Contacts,
+    DishListProvider
   ]
 })
 export class AppModule {}

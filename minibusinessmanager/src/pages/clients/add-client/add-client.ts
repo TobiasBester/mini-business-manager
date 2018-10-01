@@ -36,10 +36,15 @@ export class AddClientPage {
     content: 'Adding Client...',
     spinner: 'crescent'
   });
-  public toast = this.toastController.create({
+  public successToast = this.toastController.create({
     message: 'Client was added successfully!',
     duration: 2000
   });
+  public failureToast = this.toastController.create({
+    message: 'Failed to add client. Please try again',
+    duration: 2000
+  });
+  
   public clientList: ClientList = new ClientList(this.db);
 
   constructor(public platform: Platform, public navCtrl: NavController, public navParams: NavParams,
@@ -80,6 +85,7 @@ export class AddClientPage {
     this.loader.present();
 
     const newClient: Client = {
+      id: 'default',
       fullName: this.addClientForm.controls['fullName'].value,
       primaryNumber: this.addClientForm.controls['primaryNumber'].value,
       altNumber: this.addClientForm.controls['altNumber'].value,
@@ -90,10 +96,11 @@ export class AddClientPage {
       .then((response) => {
         console.log('Added Client:\n' + response);
         this.loader.dismiss();
-        this.toast.present();
+        this.successToast.present();
         this.addClientForm.reset();
       }, (error) => {
         console.log('Client not added!\n' + error);
+        this.failureToast.present();
       });
   }
 

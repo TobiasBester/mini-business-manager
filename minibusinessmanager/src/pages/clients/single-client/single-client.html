@@ -22,22 +22,27 @@
   <ion-item>
     <h3>Name</h3>
     <h2>{{ client.fullName }}</h2>
+    <ion-icon item-end name="create" (click)="editAttribute('fullName')"></ion-icon>
   </ion-item>
   <ion-item>
     <h3>Primary Number</h3>
     <h2>{{ client.primaryNumber }}</h2>
+    <ion-icon item-end name="create" (click)="editNumber('primaryNumber')"></ion-icon>
   </ion-item>
   <ion-item>
     <h3>Alternate Number</h3>
     <h2>{{ client.altNumber }}</h2>
+    <ion-icon item-end name="create" (click)="editNumber('altNumber')"></ion-icon>
   </ion-item>
   <ion-item>
     <h3>Source of Contact</h3>
     <h2>{{ client.contactSource }}</h2>
+    <ion-icon item-end name="create" (click)="editContactSource('contactSource')"></ion-icon>
   </ion-item>
   <ion-item>
     <h3>Address</h3>
     <p>{{ client.address }}</p>
+    <ion-icon item-end name="create" (click)="editAttribute('address')"></ion-icon>
   </ion-item>
   <ion-item>
     <h3>Favourite Dish</h3>
