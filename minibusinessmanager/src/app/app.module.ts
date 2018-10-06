@@ -22,6 +22,10 @@ import { DishesPage } from '../pages/dishes/dishes';
 import { AddDishPage } from '../pages/dishes/add-dish/add-dish';
 import { DishListProvider } from '../pages/dishes/dish-list';
 import { SingleDishPage } from '../pages/dishes/single-dish/single-dish';
+import { StockListProvider } from '../pages/stock/stock-list';
+import { StockPage } from '../pages/stock/stock';
+import { SingleStockPage } from '../pages/stock/single-stock/single-stock';
+import { AddStockPage } from '../pages/stock/add-stock/add-stock';
 
 @NgModule({
   declarations: [
@@ -34,7 +38,10 @@ import { SingleDishPage } from '../pages/dishes/single-dish/single-dish';
     SingleClientPage,
     DishesPage,
     AddDishPage,
-    SingleDishPage
+    SingleDishPage,
+    StockPage,
+    SingleStockPage,
+    AddStockPage
   ],
   imports: [
     BrowserModule,
@@ -53,7 +60,10 @@ import { SingleDishPage } from '../pages/dishes/single-dish/single-dish';
     SingleClientPage,
     DishesPage,
     AddDishPage,
-    SingleDishPage
+    SingleDishPage,
+    StockPage,
+    SingleStockPage,
+    AddStockPage
   ],
   providers: [
     StatusBar,
@@ -61,7 +71,8 @@ import { SingleDishPage } from '../pages/dishes/single-dish/single-dish';
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     FirebaseProvider,
     Contacts,
-    DishListProvider
+    DishListProvider,
+    StockListProvider
   ]
 })
 export class AppModule {}

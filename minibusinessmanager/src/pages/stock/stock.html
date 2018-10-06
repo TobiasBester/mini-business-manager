@@ -1,5 +1,5 @@
 <!--
-  Generated template for the DishesPage page.
+  Generated template for the StockPage page.
 
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
@@ -7,7 +7,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>Dishes</ion-title>
+    <ion-title>Stock</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -18,22 +18,21 @@
     Sort
     <ion-icon name="funnel"></ion-icon>
   </button>
-  <button ion-button icon-end outline (click)="goToAddDishes()">
-    Add New Dish
+  <button ion-button icon-end outline (click)="goToAddStock()">
+    Add New Stock Item
     <ion-icon name="add-circle"></ion-icon>
   </button>
   <br>
   <br>
-  <div class="listOfDishes">
-    <h3>{{ numDishes }} Dishes</h3>
-    <p>Click on a dish to view more details</p>
-    <ion-card *ngFor="let dish of dishes | async" (click)="goToDishPage(dish)">
+  <div class="listOfStock">
+    <h3>{{ numStockItems }} Stock Items</h3>
+    <p>Click on a stock item to view more details</p>
+    <ion-card *ngFor="let stock of stockItems | async" (click)="goToStockPage(stock)">
       <ion-card-header>
-        {{ dish.name }}
+        {{ stock.name }}
       </ion-card-header>
       <ion-card-content>
-        <p>R{{ dish.price }}</p>
-        <!-- <ion-icon name="arrow-round-forward"></ion-icon> -->
+        
       </ion-card-content>
     </ion-card>
   </div>
