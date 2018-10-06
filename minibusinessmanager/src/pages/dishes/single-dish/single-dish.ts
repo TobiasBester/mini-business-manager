@@ -81,7 +81,7 @@ export class SingleDishPage {
       inputs: [
         {
           name: 'attribute',
-          placeholder: att,
+          placeholder: englishAtt,
           type: attType
         }
       ],

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, LoadingController } from 'ionic-angular';
+import { NavController, NavParams, LoadingController, AlertController } from 'ionic-angular';
 import { AddDishPage } from './add-dish/add-dish';
 import { Observable } from 'rxjs';
 import { DishListProvider } from './dish-list';
@@ -24,7 +24,8 @@ export class DishesPage {
     spinner: 'crescent'
   });
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public lc: LoadingController, public dl: DishListProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public lc: LoadingController, public dl: DishListProvider,
+    public alertCtrl: AlertController) {
   }
 
   ionViewDidLoad() {
@@ -45,6 +46,38 @@ export class DishesPage {
 
   goToDishPage(selectedDish) {
     this.navCtrl.push(SingleDishPage, { dish: selectedDish });
+  }
+
+  sortList() {
+    let sortAlert = this.alertCtrl.create({
+      title: 'Sort list of dishes',
+      subTitle: 'Select which attribute to sort by',
+      inputs: [
+        {
+          type: 'radio',
+          label: 'Name',
+          value: 'name'
+        },{
+          type: 'radio',
+          label: 'Price',
+          value: 'price'
+        }
+      ],
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel'
+        },
+        {
+          text: 'Sort By',
+          handler: (data) => {
+            this.dl.sortBy(data);
+            this.dishes = this.dl.getDishListData();
+          }
+        }
+      ]
+    });
+    sortAlert.present();
   }
 
 }
