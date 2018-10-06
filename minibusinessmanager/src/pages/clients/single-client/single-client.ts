@@ -5,7 +5,6 @@ import { ClientList } from '../clientList';
 import { AngularFirestore } from 'angularfire2/firestore';
 // import { AngularFirestore, AngularFirestoreDocument } from 'angularfire2/firestore';
 
-
 /**
  * Generated class for the SingleClientPage page.
  *

@@ -24,12 +24,14 @@
   </button>
   <br>
   <div class="listOfDishes">
-    <ion-card *ngFor="let dish of dishes | async">
+    <p>Click on a dish to view more details</p>
+    <ion-card *ngFor="let dish of dishes | async" (click)="goToDishPage(dish)">
       <ion-card-header>
         {{ dish.name }}
       </ion-card-header>
       <ion-card-content>
         <p>R{{ dish.price }}</p>
+        <!-- <ion-icon name="arrow-round-forward"></ion-icon> -->
       </ion-card-content>
     </ion-card>
   </div>

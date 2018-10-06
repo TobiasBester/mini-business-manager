@@ -3,6 +3,7 @@ import { NavController, NavParams, LoadingController } from 'ionic-angular';
 import { AddDishPage } from './add-dish/add-dish';
 import { Observable } from 'rxjs';
 import { DishListProvider } from './dish-list';
+import { SingleDishPage } from './single-dish/single-dish';
 
 /**
  * Generated class for the DishesPage page.
@@ -40,6 +41,10 @@ export class DishesPage {
 
   goToAddDishes() {
     this.navCtrl.push(AddDishPage);
+  }
+
+  goToDishPage(selectedDish) {
+    this.navCtrl.push(SingleDishPage, { dish: selectedDish });
   }
 
 }

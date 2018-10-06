@@ -47,4 +47,32 @@ export class DishListProvider {
     return this.dishesData;
   }
 
+  public removeDish(dish) {
+    return new Promise<any>((resolve, reject) => {
+      this.dishCollection.doc<Dish>(dish.id).delete()
+      .then((response) => {
+        console.log('Dish Provider: Delete Response\n' + response);
+        resolve(response);
+      },
+      (error) => {
+        console.log(error);
+        reject(error);
+      });
+    });
+  }
+
+  public editAttribute(dish) {
+    return new Promise<any>((resolve, reject) => {
+        this.dishCollection.doc<Dish>(dish.id).update(dish)
+        .then((response) => {
+            console.log('Dish Provider: Edited Attribute\n' + response);
+            resolve(response);
+        },
+        (error) => {
+            console.log(error);
+            reject(error);
+        });
+    })
+}
+
 }

@@ -21,6 +21,7 @@ import { SingleClientPage } from '../pages/clients/single-client/single-client';
 import { DishesPage } from '../pages/dishes/dishes';
 import { AddDishPage } from '../pages/dishes/add-dish/add-dish';
 import { DishListProvider } from '../pages/dishes/dish-list';
+import { SingleDishPage } from '../pages/dishes/single-dish/single-dish';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { DishListProvider } from '../pages/dishes/dish-list';
     AddClientPage,
     SingleClientPage,
     DishesPage,
-    AddDishPage
+    AddDishPage,
+    SingleDishPage
   ],
   imports: [
     BrowserModule,
@@ -50,7 +52,8 @@ import { DishListProvider } from '../pages/dishes/dish-list';
     AddClientPage,
     SingleClientPage,
     DishesPage,
-    AddDishPage
+    AddDishPage,
+    SingleDishPage
   ],
   providers: [
     StatusBar,

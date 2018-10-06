@@ -56,8 +56,7 @@ export class ClientList {
             (error) => {
                 console.log(error);
                 reject(error);
-            }
-            );
+            });
         })
     }
 
