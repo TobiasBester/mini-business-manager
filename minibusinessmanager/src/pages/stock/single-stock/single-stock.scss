@@ -1,3 +1,19 @@
 page-single-stock {
 
 }
+
+.quantity-control {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+}
+
+.quantity-control__adjust {
+    padding: auto 20px; 
+    margin: 10px;
+}
+
+.quantity-control__confirm {
+    display: block;
+    margin: 10px auto;
+}

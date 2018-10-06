@@ -14,15 +14,14 @@
 
 
 <ion-content padding>
-  <button ion-button icon-end outline (click)="sortList()">
-    Sort
-    <ion-icon name="funnel"></ion-icon>
-  </button>
-  <button ion-button icon-end outline (click)="goToAddStock()">
+  <button ion-button icon-end outline (click)="goToAddStock()" class="stock-action">
     Add New Stock Item
     <ion-icon name="add-circle"></ion-icon>
   </button>
-  <br>
+  <button ion-button  icon-end outline (click)="goToAddStock()" class="stock-action">
+    Record Purchase of Item
+    <ion-icon name="cart"></ion-icon>
+  </button>
   <br>
   <div class="listOfStock">
     <h3>{{ numStockItems }} Stock Items</h3>
@@ -31,8 +30,8 @@
       <ion-card-header>
         {{ stock.name }}
       </ion-card-header>
-      <ion-card-content>
-        
+      <ion-card-content class="stock-quantity">
+          <p>Current Quantity: {{ stock.quantity }}</p>
       </ion-card-content>
     </ion-card>
   </div>

@@ -71,7 +71,7 @@ export class SingleDishPage {
     confirmAlert.present();
   }
 
-  editAttribute(att: string) {
+  editAttribute(att) {
     console.log('Editing ' + att);
     const englishAtt = this.getEnglishAttribute(att);
     const attType = this.getType(att);
@@ -93,7 +93,7 @@ export class SingleDishPage {
         {
           text: 'Confirm',
           handler: (data) => {
-            if (this.valueIsValid(data.attribute)) {
+            if (this.valueIsValid(att, data.attribute)) {
               this.editObjectAttribute(att, data.attribute);
             } else {
               this.invalidToast.onDidDismiss(() => {
@@ -144,7 +144,7 @@ export class SingleDishPage {
         break;
       }
       case 'price': {
-        this.dish.price = value;
+        this.dish.price = this.formatPrice(value);
         this.dl.editAttribute(this.dish);
         break;
       }
@@ -156,7 +156,7 @@ export class SingleDishPage {
   }
 
   numIsValid(num: number) {
-    if (num > 0 && num < 10000) {
+    if (num > 0 && num < 1000) {
       return true;
     } else {
       return false;
@@ -171,12 +171,17 @@ export class SingleDishPage {
     }
   }
 
-  valueIsValid(value: any) {
-    if (typeof(value) == 'number') {
+  valueIsValid(att, value) {
+    if (this.getType(att) == 'number') {
       return this.numIsValid(value);
     } else {
       return this.stringIsValid(value);
     }
+  }
+
+  formatPrice(inPrice: number) {
+    const strPrice: string = (inPrice * 1).toFixed(2);
+    return Number(strPrice);
   }
 
 }

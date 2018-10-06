@@ -68,7 +68,7 @@ export class AddDishPage {
     const newDish: Dish = {
       id: 'default',
       name: this.addDishForm.controls['name'].value,
-      price: this.addDishForm.controls['price'].value,
+      price: this.formatPrice(this.addDishForm.controls['price'].value),
       ingredients: this.addDishForm.controls['ingredients'].value
     };
 
@@ -80,11 +80,13 @@ export class AddDishPage {
       }, (error) => {
         console.log('Dish not added!\n' + error);
         this.failureToast.present();
+        this.loader.dismiss();
       });
   }
 
-  formatPrice(price: number) {
-    return price.toFixed(2);
+  formatPrice(inPrice: number) {
+    const strPrice: string = (inPrice * 1).toFixed(2);
+    return Number(strPrice);
   }
 
 }

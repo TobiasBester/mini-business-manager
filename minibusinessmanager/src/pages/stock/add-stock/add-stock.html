@@ -14,5 +14,19 @@
 
 
 <ion-content padding>
-
+  <form [formGroup]="addStockForm" (ngSubmit)="submitNewStock()">
+    <ion-list>
+      <ion-item>
+        <ion-label>Stock Item Name *</ion-label>
+        <ion-input formControlName="name" type="text" placeholder="Carrot"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Current Quantity *</ion-label>
+        <ion-input formControlName="quantity" type="number" placeholder="5"></ion-input>
+      </ion-item>
+    </ion-list>
+    <button ion-button type="submit" block outline [disabled]="!addStockForm.valid">
+      Confirm
+    </button>
+  </form>
 </ion-content>

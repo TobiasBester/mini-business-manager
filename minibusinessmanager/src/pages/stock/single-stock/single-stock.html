@@ -7,12 +7,31 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>singleStock</ion-title>
+    <ion-title>{{ stockItem.name }}</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-
+  <h4>Current Quantity</h4>
+  <ion-card>
+    <!-- <ion-card-header>Current Quantity</ion-card-header> -->
+    <div class="quantity-control">
+      <button icon-only ion-button outline class="quantity-control__adjust" (click)="decQ()">
+        <ion-icon name="remove"></ion-icon>
+      </button>
+      <h1>{{ tempQuantity }}</h1>
+      <button icon-only ion-button outline class="quantity-control__adjust" (click)="incQ()">
+        <ion-icon name="add"></ion-icon>
+      </button>
+    </div>
+    <button [disabled]="noChanges()" ion-button outline class="quantity-control__confirm" (click)="confirmChanges()">
+      Confirm
+    </button>
+  </ion-card>
+  <h4>Purchase History</h4>
+  <ion-list>
+    <ion-item>Feature coming soon</ion-item>
+  </ion-list>
 </ion-content>
