@@ -1,6 +1,7 @@
 import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
 import { Stock } from './stockObject';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 
 /*
   Generated class for the StockListProvider provider.
@@ -12,8 +13,9 @@ import { Injectable } from '@angular/core';
 export class StockListProvider {
 
   private listOfStockItems: Stock[] = [];
-  private stockCollection: AngularFirestoreCollection;
-  private stockItemsData: any;
+  private stockCollection: AngularFirestoreCollection<Stock>;
+  private stockItemsData: Observable<Stock[]>;
+  // private ingredients: Observable<Stock[]>;
 
   constructor(public db: AngularFirestore) {
     this.stockCollection = db.collection<Stock>('stock', ref => ref.orderBy('name'));
@@ -44,22 +46,37 @@ export class StockListProvider {
   }
 
   public getStockListData() {
-    return this.stockItemsData;
+    return this.stockCollection.valueChanges();
   }
 
-  public removeStock(stock) {
-    return new Promise<any>((resolve, reject) => {
-      this.stockCollection.doc<Stock>(stock.id).delete()
-      .then((response) => {
-        console.log('Stock Provider: Delete response\n' + response);
-        resolve(response);
-      },
-      (error) => {
-        console.log(error);
-        reject(error);
-      });
-    });
+  public getIngredients() {
+    return this.stockCollection.valueChanges();
   }
+
+  // public removeStock(stock) {
+  //   this.removeStockFromArray(stock);
+
+  //   return new Promise<any>((resolve, reject) => {
+  //     this.stockCollection.doc<Stock>(stock.id).delete()
+  //     .then((response) => {
+  //       console.log('Stock Provider: Delete response\n' + response);
+  //       resolve(response);
+  //     },
+  //     (error) => {
+  //       console.log(error);
+  //       reject(error);
+  //     });
+  //   });
+  // }
+
+  // public removeStockFromArray(stock) {
+  //   this.listOfStockItems.forEach((element, index) => {
+  //     if (element.id == stock.id) {
+  //       this.listOfStockItems.splice(index, 1);
+  //       console.log(this.listOfStockItems);
+  //     }
+  //   });
+  // }
 
   public editAttribute(stock) {
     return new Promise<any>((resolve, reject) => {

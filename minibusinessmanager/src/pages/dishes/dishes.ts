@@ -4,6 +4,8 @@ import { AddDishPage } from './add-dish/add-dish';
 import { Observable } from 'rxjs';
 import { DishListProvider } from './dish-list';
 import { SingleDishPage } from './single-dish/single-dish';
+import { StockListProvider } from '../stock/stock-list';
+import { Stock } from '../stock/stockObject';
 
 /**
  * Generated class for the DishesPage page.
@@ -18,6 +20,7 @@ import { SingleDishPage } from './single-dish/single-dish';
 })
 export class DishesPage {
   dishes: Observable<any[]>;
+
   numDishes = 0;
   loader = this.lc.create({
     content: 'Fetching list of dishes',

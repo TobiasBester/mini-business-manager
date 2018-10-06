@@ -3,6 +3,9 @@ import { NavController, NavParams, LoadingController, ToastController } from 'io
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Dish } from '../dishObject';
 import { DishListProvider } from '../dish-list';
+import { StockListProvider } from '../../stock/stock-list';
+import { Observable } from 'rxjs';
+import { Subscription } from 'rxjs';
 
 /**
  * Generated class for the AddDishPage page.
@@ -18,17 +21,25 @@ import { DishListProvider } from '../dish-list';
 export class AddDishPage {
 
   public addDishForm: FormGroup;
+  public stockItems: Observable<any[]>;
+  public stockProviderSub: Subscription;
+  public isSubbed = true;
   public ingredients: string[] = [
-    'Beef',
-    'Chicken',
-    'Pork',
-    'Rice',
-    'Noodles',
-    'Pastry',
-    'Vegetables'
+    'rice', 
+    'noodles', 
+    'pastry', 
+    'beef', 
+    'chicken', 
+    'pork', 
+    'beef mince',
+    'vegetables'
   ];
   public loader = this.loadingController.create({
     content: 'Adding Dish...',
+    spinner: 'crescent'
+  });
+  public stockLoader = this.loadingController.create({
+    content: 'Getting stock items...',
     spinner: 'crescent'
   });
   public successToast = this.toastController.create({
@@ -41,7 +52,8 @@ export class AddDishPage {
   });
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public loadingController: LoadingController, 
-    public toastController: ToastController, private formBuilder: FormBuilder, public dl: DishListProvider) {
+    public toastController: ToastController, private formBuilder: FormBuilder, public dl: DishListProvider,
+    public sl: StockListProvider) {
 
       this.addDishForm = this.formBuilder.group({
         name: new FormControl('', Validators.compose([
@@ -55,11 +67,37 @@ export class AddDishPage {
         ])),
         ingredients: new FormControl(null)
       });
+
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad AddDishPage');
+    // this.stockProviderSub.unsubscribe();
+    this.stockLoader.present();
+    this.stockItems = this.sl.getIngredients();
+    console.log('addDish on did load and ' + this.isSubbed);
+    this.stockProviderSub = this.stockItems.subscribe((data) => {
+      console.log('addDish in subscribe');
+      this.stockLoader.dismiss();
+    }, (error) => {
+      console.log('Error: ' + error);
+      this.failureToast.present();
+    });
   }
+
+  // ionViewWillEnter() {
+  //   console.log('AddDish will enter and ' + this.isSubbed);
+  //   if (this.isSubbed == false) {
+  //     this.stockItems = this.sl.getStockListData();
+  //     this.stockProviderSub = this.stockItems.subscribe((data) => {
+  //       console.log('addDish in subscribe');
+  //       this.loader.dismiss();
+  //       this.isSubbed = true;
+  //     }, (error) => {
+  //       console.log('Error: ' + error);
+  //       this.failureToast.present();
+  //     });
+  //   }
+  // }
 
   submitNewDishForm() {
     console.log('Form Valid!');

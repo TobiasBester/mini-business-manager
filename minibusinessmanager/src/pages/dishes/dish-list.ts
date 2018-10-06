@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
 import { Dish } from './dishObject';
+import { Observable } from 'rxjs';
 
 /*
   Generated class for the DishListProvider provider.
@@ -13,7 +14,7 @@ export class DishListProvider {
 
   private listOfDishes: Dish[] = [];
   private dishCollection: AngularFirestoreCollection<Dish>;
-  private dishesData: any;
+  private dishesData: Observable<Dish[]>;
 
   constructor(public db: AngularFirestore) {
     this.dishCollection = db.collection<Dish>('dishes', ref => ref.orderBy('name'));
@@ -48,6 +49,8 @@ export class DishListProvider {
   }
 
   public removeDish(dish) {
+    this.removeFromArray(dish);
+
     return new Promise<any>((resolve, reject) => {
       this.dishCollection.doc<Dish>(dish.id).delete()
       .then((response) => {
@@ -58,6 +61,15 @@ export class DishListProvider {
         console.log(error);
         reject(error);
       });
+    });
+  }
+
+  public removeFromArray(dish) {
+    this.listOfDishes.forEach((element, index) => {
+      if (element.id == dish.id) {
+        this.listOfDishes.splice(index, 1);
+        console.log(this.listOfDishes);
+      }
     });
   }
 

@@ -27,7 +27,7 @@
       <ion-item>
         <ion-label color="primary">Main Ingredients</ion-label>
         <ion-select formControlName="ingredients" multiple="true">
-          <ion-option *ngFor="let i of ingredients" [value]="i">{{ i }}</ion-option>
+          <ion-option *ngFor="let s of stockItems | async" [value]="s.name">{{ s.name }}</ion-option>
         </ion-select>
       </ion-item>
     </ion-list>

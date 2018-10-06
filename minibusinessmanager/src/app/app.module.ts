@@ -26,6 +26,7 @@ import { StockListProvider } from '../pages/stock/stock-list';
 import { StockPage } from '../pages/stock/stock';
 import { SingleStockPage } from '../pages/stock/single-stock/single-stock';
 import { AddStockPage } from '../pages/stock/add-stock/add-stock';
+import { PurchaseListProvider } from '../pages/purchases/purchase-list';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,7 @@ import { AddStockPage } from '../pages/stock/add-stock/add-stock';
     BrowserModule,
     IonicModule.forRoot(MyApp),
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFirestoreModule
+    AngularFirestoreModule.enablePersistence()
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -72,7 +73,8 @@ import { AddStockPage } from '../pages/stock/add-stock/add-stock';
     FirebaseProvider,
     Contacts,
     DishListProvider,
-    StockListProvider
+    StockListProvider,
+    PurchaseListProvider
   ]
 })
 export class AppModule {}
