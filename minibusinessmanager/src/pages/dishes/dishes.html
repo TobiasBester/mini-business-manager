@@ -32,7 +32,7 @@
         {{ dish.name }}
       </ion-card-header>
       <ion-card-content>
-        <p>R{{ (dish.price * 1).toFixed(2) }}</p>
+        <p>{{ dish.price | currency: 'ZAR' }}</p>
         <!-- <ion-icon name="arrow-round-forward"></ion-icon> -->
       </ion-card-content>
     </ion-card>

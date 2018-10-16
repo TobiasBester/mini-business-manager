@@ -23,6 +23,14 @@ export class SingleStockPage {
     message: 'Successfully updated quantity',
     duration: 2000
   });
+  public deleteToast = this.toastController.create({
+    message: 'Successfully removed stock item',
+    duration: 2000
+  });
+  public deleteFailToast = this.toastController.create({
+    message: 'Failed to remove stock item. Please try again',
+    duration: 2000
+  });
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public toastController: ToastController,
     public sl: StockListProvider, public alertCtrl: AlertController) {
@@ -53,6 +61,38 @@ export class SingleStockPage {
     this.quantity = this.tempQuantity;
     this.stockItem.quantity = this.quantity;
     this.sl.editAttribute(this.stockItem);
+  }
+
+  removeStockItem() {
+    let confirmAlert = this.alertCtrl.create({
+      title: 'Remove Stock Item',
+      subTitle: 'Are you sure you want to remove this stock item?',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel'
+        },
+        {
+          text: 'Delete',
+          handler: () => {
+            this.sl.removeStock(this.stockItem)
+            .then((response)=> {
+              console.log('Removed dish');
+              this.deleteToast.present();
+              this.navCtrl.pop();
+            }, 
+            (error) => {
+              console.log('Did not remove dish');
+              console.log(error);
+              this.deleteFailToast.onDidDismiss(() => {
+                this.deleteFailToast.present();
+              });
+            });
+          }
+        }
+      ]
+    });
+    confirmAlert.present();
   }
 
 }

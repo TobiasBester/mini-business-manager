@@ -42,6 +42,10 @@ export class AddDishPage {
     content: 'Getting stock items...',
     spinner: 'crescent'
   });
+  public stockFailureToast = this.toastController.create({
+    message: 'Failed to get stock items. Please try again',
+    duration: 2000
+  });
   public successToast = this.toastController.create({
     message: 'Dish was added successfully!',
     duration: 2000
@@ -80,24 +84,9 @@ export class AddDishPage {
       this.stockLoader.dismiss();
     }, (error) => {
       console.log('Error: ' + error);
-      this.failureToast.present();
+      this.stockFailureToast.present();
     });
   }
-
-  // ionViewWillEnter() {
-  //   console.log('AddDish will enter and ' + this.isSubbed);
-  //   if (this.isSubbed == false) {
-  //     this.stockItems = this.sl.getStockListData();
-  //     this.stockProviderSub = this.stockItems.subscribe((data) => {
-  //       console.log('addDish in subscribe');
-  //       this.loader.dismiss();
-  //       this.isSubbed = true;
-  //     }, (error) => {
-  //       console.log('Error: ' + error);
-  //       this.failureToast.present();
-  //     });
-  //   }
-  // }
 
   submitNewDishForm() {
     console.log('Form Valid!');

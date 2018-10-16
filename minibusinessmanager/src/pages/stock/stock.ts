@@ -5,6 +5,7 @@ import { AddStockPage } from './add-stock/add-stock';
 import { StockListProvider } from './stock-list';
 import { SingleStockPage } from './single-stock/single-stock';
 import { Subscription } from 'rxjs';
+import { RecordPurchasePage } from '../purchases/record-purchase/record-purchase';
 
 /**
  * Generated class for the StockPage page.
@@ -52,6 +53,10 @@ export class StockPage {
 
   goToAddStock() {
     this.navCtrl.push(AddStockPage);
+  }
+
+  goToRecPur() {
+    this.navCtrl.push(RecordPurchasePage);
   }
 
   goToStockPage(selectedStockItem) {

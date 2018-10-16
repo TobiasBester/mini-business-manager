@@ -12,7 +12,6 @@ import { Observable } from 'rxjs';
 @Injectable()
 export class StockListProvider {
 
-  private listOfStockItems: Stock[] = [];
   private stockCollection: AngularFirestoreCollection<Stock>;
   private stockItemsData: Observable<Stock[]>;
   // private ingredients: Observable<Stock[]>;
@@ -25,7 +24,6 @@ export class StockListProvider {
   public addStock(s: Stock) {
     const id = this.db.createId();
     s.id = id;
-    this.listOfStockItems.push(s);
 
     return new Promise<any>((resolve, reject) => {
       this.stockCollection.doc(id).set(s)
@@ -53,30 +51,19 @@ export class StockListProvider {
     return this.stockCollection.valueChanges();
   }
 
-  // public removeStock(stock) {
-  //   this.removeStockFromArray(stock);
-
-  //   return new Promise<any>((resolve, reject) => {
-  //     this.stockCollection.doc<Stock>(stock.id).delete()
-  //     .then((response) => {
-  //       console.log('Stock Provider: Delete response\n' + response);
-  //       resolve(response);
-  //     },
-  //     (error) => {
-  //       console.log(error);
-  //       reject(error);
-  //     });
-  //   });
-  // }
-
-  // public removeStockFromArray(stock) {
-  //   this.listOfStockItems.forEach((element, index) => {
-  //     if (element.id == stock.id) {
-  //       this.listOfStockItems.splice(index, 1);
-  //       console.log(this.listOfStockItems);
-  //     }
-  //   });
-  // }
+  public removeStock(stock) {
+    return new Promise<any>((resolve, reject) => {
+      this.stockCollection.doc<Stock>(stock.id).delete()
+      .then((response) => {
+        console.log('Stock Provider: Delete response\n' + response);
+        resolve(response);
+      },
+      (error) => {
+        console.log(error);
+        reject(error);
+      });
+    });
+  }
 
   public editAttribute(stock) {
     return new Promise<any>((resolve, reject) => {

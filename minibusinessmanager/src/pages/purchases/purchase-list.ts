@@ -16,7 +16,6 @@ export class PurchaseListProvider {
   private purchasesData: any;
 
   constructor(public db: AngularFirestore) {
-    console.log('Hello PurchaseListProvider Provider');
     this.purchaseCollection = db.collection<Purchase>('purchases', ref => ref.orderBy('date'));
     this.purchasesData = this.purchaseCollection.valueChanges();
   }
@@ -29,7 +28,6 @@ export class PurchaseListProvider {
     return new Promise<any>((resolve, reject) => {
       this.purchaseCollection.doc(id).set(p)
       .then((response) => {
-        console.log('Purchase List: Add Purchase Response\n' + response);
         resolve(response);
       },
       (error) => {
@@ -56,7 +54,6 @@ export class PurchaseListProvider {
     return new Promise<any>((resolve, reject) => {
       this.purchaseCollection.doc<Purchase>(purchase.id).delete()
       .then((response) => {
-        console.log('Purchase Provider: Delete response\n' + response);
         resolve(response);
       },
       (error) => {
@@ -70,7 +67,6 @@ export class PurchaseListProvider {
     return new Promise<any>((resolve, reject) => {
         this.purchaseCollection.doc<Purchase>(purchase.id).update(purchase)
         .then((response) => {
-            console.log('Purchase Provider: Edited Attribute\n' + response);
             resolve(response);
         },
         (error) => {
