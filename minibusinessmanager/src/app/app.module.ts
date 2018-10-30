@@ -29,6 +29,9 @@ import { AddStockPage } from '../pages/stock/add-stock/add-stock';
 import { PurchaseListProvider } from '../pages/purchases/purchase-list';
 import { RecordPurchasePage } from '../pages/purchases/record-purchase/record-purchase';
 import { AddPurchaseProvider } from '../pages/purchases/add-purchase';
+import { AddOrderPage } from '../pages/orders/add-order/add-order';
+import { OrderListProvider } from '../pages/orders/order-list';
+import { ClientListProvider } from '../pages/clients/clientList';
 
 @NgModule({
   declarations: [
@@ -45,7 +48,8 @@ import { AddPurchaseProvider } from '../pages/purchases/add-purchase';
     StockPage,
     SingleStockPage,
     AddStockPage,
-    RecordPurchasePage
+    RecordPurchasePage,
+    AddOrderPage
   ],
   imports: [
     BrowserModule,
@@ -68,7 +72,8 @@ import { AddPurchaseProvider } from '../pages/purchases/add-purchase';
     StockPage,
     SingleStockPage,
     AddStockPage,
-    RecordPurchasePage
+    RecordPurchasePage,
+    AddOrderPage
   ],
   providers: [
     StatusBar,
@@ -79,7 +84,9 @@ import { AddPurchaseProvider } from '../pages/purchases/add-purchase';
     DishListProvider,
     StockListProvider,
     PurchaseListProvider,
-    AddPurchaseProvider
+    AddPurchaseProvider,
+    OrderListProvider,
+    ClientListProvider
   ]
 })
 export class AppModule {}

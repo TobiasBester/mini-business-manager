@@ -7,14 +7,37 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>orders</ion-title>
+    <ion-title>Orders</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-  <ion-card>
-    <ion-title>Current Orders</ion-title>
+  <ion-card class="currentorders">
+    <ion-card-content>
+      <ion-card-title>Current Orders</ion-card-title>
+      <p>
+        No orders as of yet
+      </p>
+    </ion-card-content>
+  </ion-card>
+  <button ion-button icon-end full large (click)="goToAddOrder()">
+    New Order
+    <ion-icon name="add"></ion-icon>
+  </button>
+  <ion-card class="allorders">
+    <ion-card-content>
+      <ion-card-title>Order History</ion-card-title>
+      <button ion-button icon-end outline (click)="sortList()">
+        Sort
+        <ion-icon name="funnel"></ion-icon>
+      </button>
+      <br>
+      <ion-list>
+        <p>Tap on an order to view details</p>
+        <ion-item></ion-item>
+      </ion-list>
+    </ion-card-content>
   </ion-card>
 </ion-content>

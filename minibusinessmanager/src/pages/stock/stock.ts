@@ -42,7 +42,6 @@ export class StockPage {
     this.stockItems = this.sl.getStockListData();
     console.log('stock on did load');
     this.stockProviderSub = this.stockItems.subscribe((data) => {
-      console.log('stock in subscribe');
       this.numStockItems = data.length;
       this.loader.dismiss();
     }, (error) => {

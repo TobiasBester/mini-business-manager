@@ -1,17 +1,18 @@
 import { Client } from "../clients/clientObject";
 // import { AngularFirestore, AngularFirestoreDocument, AngularFirestoreCollection } from "angularfire2/firestore";
 import { AngularFirestore, AngularFirestoreCollection } from "angularfire2/firestore";
+import { Injectable } from "@angular/core";
 // import { Observable } from "rx";
 
-
-export class ClientList {
+@Injectable()
+export class ClientListProvider {
     private listOfClients: Client[] = [];
     private clientCollection: AngularFirestoreCollection<Client>;
-    private clientsData: any;
+    // private clientsData: any;
     
     constructor(public db: AngularFirestore) {
         this.clientCollection = db.collection<Client>('clients', ref => ref.orderBy('fullName'));
-        this.clientsData = this.clientCollection.valueChanges();
+        // this.clientsData = this.clientCollection.valueChanges();
     }
 
     public getClientObjects(): Client[] {
@@ -39,11 +40,15 @@ export class ClientList {
 
     public sortBy(attribute: string) {
         this.clientCollection = this.db.collection<Client>('clients', ref => ref.orderBy(attribute));
-        this.clientsData = this.clientCollection.valueChanges();
+        // this.clientsData = this.clientCollection.valueChanges();
     }
 
     public getClientListData() {
-        return this.clientsData;
+        return this.clientCollection.valueChanges();
+    }
+
+    public getClientsForOrders() {
+        return this.clientCollection.valueChanges();
     }
 
     public removeClient(client) {
@@ -72,6 +77,6 @@ export class ClientList {
                 reject(error);
             }
             );
-        })
+        });
     }
 }

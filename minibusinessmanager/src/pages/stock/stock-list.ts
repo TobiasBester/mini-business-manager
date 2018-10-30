@@ -1,7 +1,6 @@
 import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
 import { Stock } from './stockObject';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
 
 /*
   Generated class for the StockListProvider provider.
@@ -13,12 +12,9 @@ import { Observable } from 'rxjs';
 export class StockListProvider {
 
   private stockCollection: AngularFirestoreCollection<Stock>;
-  private stockItemsData: Observable<Stock[]>;
-  // private ingredients: Observable<Stock[]>;
 
   constructor(public db: AngularFirestore) {
     this.stockCollection = db.collection<Stock>('stock', ref => ref.orderBy('name'));
-    this.stockItemsData = this.stockCollection.valueChanges();
   }
 
   public addStock(s: Stock) {
@@ -40,7 +36,7 @@ export class StockListProvider {
 
   public sortBy(attribute: string) {
     this.stockCollection = this.db.collection<Stock>('stock', ref => ref.orderBy(attribute));
-    this.stockItemsData = this.stockCollection.valueChanges();
+    // this.stockItemsData = this.stockCollection.valueChanges();
   }
 
   public getStockListData() {

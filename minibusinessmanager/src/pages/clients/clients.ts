@@ -1,8 +1,8 @@
 import { AddClientPage } from './add-client/add-client';
 import { Component } from '@angular/core';
 import { NavController, NavParams, LoadingController, AlertController } from 'ionic-angular';
-import { Observable } from 'rxjs';
-import { ClientList } from './clientList';
+import { Observable, Subscription } from 'rxjs';
+import { ClientListProvider } from './clientList';
 import { AngularFirestore } from 'angularfire2/firestore';
 import { SingleClientPage } from './single-client/single-client';
 
@@ -18,24 +18,29 @@ import { SingleClientPage } from './single-client/single-client';
 })
 export class ClientsPage {
 
-  clients: Observable<any[]>;
-  numClients = 0;
-  loader = this.lc.create({
+  public clients: Observable<any[]>;
+  public clientProviderSub: Subscription;
+  public numClients = 0;
+  public loader = this.lc.create({
     content: 'Fetching list of clients',
     spinner: 'crescent'
   });
-  public clientList: ClientList = new ClientList(this.db);
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public lc: LoadingController, 
-    public db: AngularFirestore, public alertCtrl: AlertController) {
+  constructor(
+    public navCtrl: NavController, 
+    public navParams: NavParams, 
+    public lc: LoadingController, 
+    public db: AngularFirestore, 
+    public alertCtrl: AlertController,
+    public clientList: ClientListProvider) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ClientsPage');
     this.loader.present();
     this.clients = this.clientList.getClientListData();
-    this.clients.subscribe((data) => {
-      this.numClients = data.length
+    this.clientProviderSub = this.clients.subscribe((data) => {
+      this.numClients = data.length;
       this.loader.dismiss();
     }, (error) => {
       console.log('Error: ' + error);

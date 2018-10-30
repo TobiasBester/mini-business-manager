@@ -4,8 +4,6 @@ import { AddDishPage } from './add-dish/add-dish';
 import { Observable } from 'rxjs';
 import { DishListProvider } from './dish-list';
 import { SingleDishPage } from './single-dish/single-dish';
-import { StockListProvider } from '../stock/stock-list';
-import { Stock } from '../stock/stockObject';
 
 /**
  * Generated class for the DishesPage page.

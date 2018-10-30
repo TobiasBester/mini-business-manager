@@ -6,7 +6,7 @@ import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms'
 import { LoadingController } from 'ionic-angular';
 // import { AngularFirestore } from 'angularfire2/firestore';
 import { Client } from '../../clients/clientObject';
-import { ClientList } from '../clientList';
+import { ClientListProvider } from '../clientList';
 import { AngularFirestore } from 'angularfire2/firestore';
 
 /**
@@ -44,12 +44,11 @@ export class AddClientPage {
     message: 'Failed to add client. Please try again',
     duration: 2000
   });
-  
-  public clientList: ClientList = new ClientList(this.db);
 
   constructor(public platform: Platform, public navCtrl: NavController, public navParams: NavParams,
      private formBuilder: FormBuilder, public firebaseProvider: FirebaseProvider, public loadingController: LoadingController, 
-     public toastController: ToastController, public contacts: Contacts, public db: AngularFirestore) {
+     public toastController: ToastController, public contacts: Contacts, public db: AngularFirestore,
+     public clientList: ClientListProvider) {
     
     this.addClientForm = this.formBuilder.group({
       fullName: new FormControl('', Validators.compose([

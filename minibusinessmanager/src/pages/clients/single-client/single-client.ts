@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, AlertController, ToastController } from 'ionic-angular';
 import { Client } from '../clientObject';
-import { ClientList } from '../clientList';
+import { ClientListProvider } from '../clientList';
 import { AngularFirestore } from 'angularfire2/firestore';
 // import { AngularFirestore, AngularFirestoreDocument } from 'angularfire2/firestore';
 
@@ -18,7 +18,6 @@ import { AngularFirestore } from 'angularfire2/firestore';
 })
 export class SingleClientPage {
 
-  public cl: ClientList = new ClientList(this.db);
   public client: Client;
   public successToast = this.toastController.create({
     message: 'Successfully removed client',
@@ -33,8 +32,13 @@ export class SingleClientPage {
     duration: 2000
   });
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public db: AngularFirestore, 
-    public alertCtrl: AlertController, public toastController: ToastController ) {
+  constructor(
+    public navCtrl: NavController, 
+    public navParams: NavParams, 
+    public db: AngularFirestore, 
+    public alertCtrl: AlertController, 
+    public toastController: ToastController, 
+    public cl: ClientListProvider ) {
     this.client = navParams.get('client');
   }
 
