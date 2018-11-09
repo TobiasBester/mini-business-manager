@@ -1,14 +1,15 @@
 import { Client } from "../clients/clientObject";
-import { Dish } from "../dishes/dishObject";
+import { OrderItem } from "./orderItemObject";
 
 export interface Order {
-    id: string,
+    id: string;
+    completed: boolean;
     datePlaced: Date;
     dateCompleted: Date;
     dateDue: Date;
     timeDue: Date;
     client: Client;
-    dishes: Dish[];
+    orderItems: OrderItem[];
     totalCost: Number;
     notes: String;
 }

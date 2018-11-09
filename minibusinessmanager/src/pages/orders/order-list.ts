@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Order } from './orderObject';
 import { AngularFirestoreCollection, AngularFirestore } from 'angularfire2/firestore';
-import { Observable } from 'rxjs';
+// import { Observable } from 'rxjs';
 
 /*
   Generated class for the OrderListProvider provider.
@@ -14,11 +14,11 @@ export class OrderListProvider {
 
   private listOfOrders: Order[] = [];
   private orderCollection: AngularFirestoreCollection<Order>;
-  private ordersData: Observable<Order[]>;
+  // private ordersData: Observable<Order[]>;
 
   constructor(public db: AngularFirestore) {
     this.orderCollection = db.collection<Order>('orders', ref => ref.orderBy('dateCompleted'));
-    this.ordersData = this.orderCollection.valueChanges();
+    // this.ordersData = this.orderCollection.valueChanges();
   }
 
   public addOrder(o: Order) {
@@ -41,11 +41,11 @@ export class OrderListProvider {
 
   public sortBy(attribute: string) {
     this.orderCollection = this.db.collection<Order>('orders', ref => ref.orderBy(attribute));
-    this.ordersData = this.orderCollection.valueChanges();
+    // this.ordersData = this.orderCollection.valueChanges();
   }
 
   public getOrderListData() {
-    return this.ordersData;
+    return this.orderCollection.valueChanges();
   }
 
   public removeOrder(order) {

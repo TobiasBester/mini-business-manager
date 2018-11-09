@@ -13,11 +13,11 @@ export class PurchaseListProvider {
 
   private listOfPurchases: Purchase[] = [];
   private purchaseCollection: AngularFirestoreCollection;
-  private purchasesData: any;
+  // private purchasesData: any;
 
   constructor(public db: AngularFirestore) {
     this.purchaseCollection = db.collection<Purchase>('purchases', ref => ref.orderBy('date'));
-    this.purchasesData = this.purchaseCollection.valueChanges();
+    // this.purchasesData = this.purchaseCollection.valueChanges();
   }
 
   public addPurchase(p: Purchase) {
@@ -39,11 +39,11 @@ export class PurchaseListProvider {
 
   public sortBy(attribute: string) {
     this.purchaseCollection = this.db.collection<Purchase>('purchases', ref => ref.orderBy(attribute));
-    this.purchasesData = this.purchaseCollection.valueChanges();
+    // this.purchasesData = this.purchaseCollection.valueChanges();
   }
 
   public getPurchaseData() {
-    return this.purchasesData;
+    return this.purchaseCollection.valueChanges();
   }
 
   public getStockPurchases() {

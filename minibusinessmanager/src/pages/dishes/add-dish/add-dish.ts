@@ -88,6 +88,10 @@ export class AddDishPage {
     });
   }
 
+  ionViewWillLeave() {
+    this.stockProviderSub.unsubscribe();
+  }
+
   submitNewDishForm() {
     console.log('Form Valid!');
     this.loader.present();

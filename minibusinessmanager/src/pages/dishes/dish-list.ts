@@ -14,11 +14,11 @@ export class DishListProvider {
 
   private listOfDishes: Dish[] = [];
   private dishCollection: AngularFirestoreCollection<Dish>;
-  private dishesData: Observable<Dish[]>;
+  // private dishesData: Observable<Dish[]>;
 
   constructor(public db: AngularFirestore) {
     this.dishCollection = db.collection<Dish>('dishes', ref => ref.orderBy('name'));
-    this.dishesData = this.dishCollection.valueChanges();
+    // this.dishesData = this.dishCollection.valueChanges();
   }
 
   public addDish(d: Dish) {
@@ -41,11 +41,15 @@ export class DishListProvider {
 
   public sortBy(attribute: string) {
     this.dishCollection = this.db.collection<Dish>('dishes', ref => ref.orderBy(attribute));
-    this.dishesData = this.dishCollection.valueChanges();
+    // this.dishesData = this.dishCollection.valueChanges();
+  }
+
+  public getDishesForOrders() {
+    return this.dishCollection.valueChanges();
   }
 
   public getDishListData() {
-    return this.dishesData;
+    return this.dishCollection.valueChanges();
   }
 
   public removeDish(dish) {

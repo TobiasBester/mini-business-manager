@@ -14,12 +14,15 @@
 
 
 <ion-content padding>
-  <form [formGroup]="addOrderForm" (ngSubmit)="submitNewOrderForm()">
+  <form [formGroup]="addOrderForm">
+    <button ion-button type="submit" [disabled]="!entireOrderIsValid()" (click)="submitNewOrderForm()" block outline>
+      Confirm Order
+    </button>
     <ion-list>
       <ion-item>
         <ion-label color="primary">Client</ion-label>
         <ion-select formControlName="client">
-          <ion-option *ngFor="let c of clientData | async" [value]="c.fullName">{{ c.fullName }}</ion-option>
+          <ion-option *ngFor="let c of clientData | async" [value]="c">{{ c.fullName }}</ion-option>
         </ion-select>
       </ion-item>
       <ion-item>
@@ -30,10 +33,35 @@
         <ion-label color="primary">Time Due</ion-label>
         <ion-datetime formControlName="timeDue" displayFormat="h:mm A" pickerFormat="h mm A"></ion-datetime>
       </ion-item>
+      <ion-card class="orderItems">
+        <ion-item>
+          <ion-label color="primary">Order Item Dish</ion-label>
+          <ion-select formControlName="dishes">
+            <ion-option *ngFor="let d of dishData | async" [value]="d">{{ d.name }}</ion-option>
+          </ion-select>
+        </ion-item>
+        <ion-item>
+          <ion-label color="primary">Order Item Quantity</ion-label>
+          <ion-input type="number" formControlName="quantity" step="1" placeholder="1"></ion-input>
+        </ion-item>
+        <button ion-button outline style="margin: 5px auto; display: block;" (click)="addOrderItem()" [disabled]="!orderItemsAreValid()">
+          Add Order Item
+        </button>
+        <ion-card>
+          <ion-card-header>Items in Order</ion-card-header>
+          <ion-card-content>
+            <p *ngFor="let i of allOrderItems">&nbsp;&nbsp;{{ i.dish.name }}&nbsp;&nbsp;x {{ i.quantity }}</p>
+            <p style="font-weight: bold">Order Cost: {{ getOrderTotal() | currency:'ZAR' }}</p>
+          </ion-card-content>          
+        </ion-card>
+      </ion-card>
       <ion-item>
         <ion-label color="primary">Notes</ion-label>
         <ion-textarea formControlName="notes" placeholder="Additional notes..."></ion-textarea>
       </ion-item>
     </ion-list>
+    <button ion-button type="submit" [disabled]="!entireOrderIsValid()" (click)="submitNewOrderForm()" block outline>
+      Confirm Order
+    </button>
   </form>
 </ion-content>
