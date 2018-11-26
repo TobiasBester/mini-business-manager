@@ -42,7 +42,7 @@
         </ion-item>
         <ion-item>
           <ion-label color="primary">Order Item Quantity</ion-label>
-          <ion-input type="number" formControlName="quantity" step="1" placeholder="1"></ion-input>
+          <ion-input type="number" formControlName="quantity" step="1"></ion-input>
         </ion-item>
         <button ion-button outline style="margin: 5px auto; display: block;" (click)="addOrderItem()" [disabled]="!orderItemsAreValid()">
           Add Order Item

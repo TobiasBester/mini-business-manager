@@ -17,26 +17,33 @@
   <ion-card class="currentorders">
     <ion-card-content>
       <ion-card-title>Current Orders</ion-card-title>
-      <p>
-        No orders as of yet
+      <h4>Tap on an order to view details</h4>
+      <p *ngIf="numCurrentOrders == 0">
+        No orders currently due
       </p>
+      <ion-list class="currorders_orderlist">
+        <!-- &nbsp;&nbsp;&nbsp;&nbsp;Date Due &nbsp;&nbsp;&nbsp;Client Name -->
+        <ion-item *ngFor="let currOrder of currentOrders | async" (click)="goToOrderPage(currOrder)">
+          {{ currOrder.dateDue }} &nbsp;&nbsp; {{ currOrder.client.fullName }}
+        </ion-item>
+      </ion-list>
     </ion-card-content>
   </ion-card>
-  <button ion-button icon-end full large (click)="goToAddOrder()">
+  <button class="add-order-btn" ion-button icon-end outline large (click)="goToAddOrder()">
     New Order
     <ion-icon name="add"></ion-icon>
   </button>
   <ion-card class="allorders">
     <ion-card-content>
       <ion-card-title>
-        Completed Orders <span class="allorders__numorders">{{ numClients }}</span>
+        All Orders <span class="allorders__numorders">{{ numOrders }}</span>
       </ion-card-title>
       <button ion-button icon-end outline (click)="sortList()">
         Sort
         <ion-icon name="funnel"></ion-icon>
       </button>
       <br>
-      <ion-list>
+      <ion-list class="allorders_orderlist">
         <p>Tap on an order to view details</p>
         <!-- &nbsp;&nbsp;&nbsp;&nbsp;Date Due &nbsp;&nbsp;&nbsp;Client Name -->
         <ion-item *ngFor="let order of orders | async" (click)="goToOrderPage(order)">

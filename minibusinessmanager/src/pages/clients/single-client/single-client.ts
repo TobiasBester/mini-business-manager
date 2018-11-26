@@ -3,6 +3,9 @@ import { NavController, NavParams, AlertController, ToastController } from 'ioni
 import { Client } from '../clientObject';
 import { ClientListProvider } from '../clientList';
 import { AngularFirestore } from 'angularfire2/firestore';
+import { Observable } from 'rxjs';
+import { OrderListProvider } from '../../orders/order-list';
+import { SingleOrderPage } from '../../orders/single-order/single-order';
 // import { AngularFirestore, AngularFirestoreDocument } from 'angularfire2/firestore';
 
 /**
@@ -19,6 +22,9 @@ import { AngularFirestore } from 'angularfire2/firestore';
 export class SingleClientPage {
 
   public client: Client;
+  public clientOrders: Observable<any[]>;
+  public numOrders = 0;
+
   public successToast = this.toastController.create({
     message: 'Successfully removed client',
     duration: 2000
@@ -38,12 +44,16 @@ export class SingleClientPage {
     public db: AngularFirestore, 
     public alertCtrl: AlertController, 
     public toastController: ToastController, 
-    public cl: ClientListProvider ) {
+    public cl: ClientListProvider,
+    public ol: OrderListProvider ) {
     this.client = navParams.get('client');
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad SingleClientPage');
+    this.clientOrders = this.ol.getClientOrderList(this.client.id);
+    this.clientOrders.subscribe((data) => {
+      this.numOrders = data.length;
+    });
   }
 
   removeClient() {
@@ -274,6 +284,18 @@ export class SingleClientPage {
     } else {
       return false;
     }
+  }
+
+  getOrderItems(order) {
+    let result = "";
+    order.orderItems.forEach(element => {
+      result += element.dish.name + ' x' + element.quantity + ' ';
+    });
+    return result;
+  }
+
+  goToOrderPage(selectedOrder) {
+    this.navCtrl.push(SingleOrderPage, { order: selectedOrder });
   }
 
 }

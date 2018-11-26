@@ -89,7 +89,8 @@ export class AddClientPage {
       primaryNumber: this.addClientForm.controls['primaryNumber'].value,
       altNumber: this.addClientForm.controls['altNumber'].value,
       contactSource: this.addClientForm.controls['contactSource'].value,
-      address: this.addClientForm.controls['address'].value
+      address: this.addClientForm.controls['address'].value,
+      numCurrentOrders: 0
     };
     this.clientList.addClient(newClient)
       .then((response) => {

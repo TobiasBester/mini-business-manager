@@ -19,8 +19,10 @@ import { SingleClientPage } from './single-client/single-client';
 export class ClientsPage {
 
   public clients: Observable<any[]>;
+  public currentClients: Observable<any[]>;
   public clientProviderSub: Subscription;
   public numClients = 0;
+  public numCurrentClients = 0;
   public loader = this.lc.create({
     content: 'Fetching list of clients',
     spinner: 'crescent'
@@ -36,8 +38,11 @@ export class ClientsPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad ClientsPage');
     this.loader.present();
+    this.currentClients = this.clientList.getClientsWithCurrentOrders();
+    this.currentClients.subscribe((data) => {
+      this.numCurrentClients = data.length;
+    });
     this.clients = this.clientList.getClientListData();
     this.clientProviderSub = this.clients.subscribe((data) => {
       this.numClients = data.length;

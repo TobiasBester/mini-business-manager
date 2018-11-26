@@ -5,4 +5,5 @@ export interface Client {
     altNumber: string; 
     contactSource: string; 
     address: string;
+    numCurrentOrders: number;
 }

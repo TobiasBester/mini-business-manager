@@ -18,9 +18,14 @@
       <ion-card-title>
         Clients with current orders
       </ion-card-title>
-      <p>
-        No orders currently due
+      <p *ngIf="numCurrentClients == 0">
+        No clients with orders currently due
       </p>
+      <ion-list class="currclients_clientlist">
+        <p>Tap on a client to view details</p>
+        <ion-item *ngFor="let currClient of currentClients | async" (click)="goToClientPage(currClient)">
+          {{ currClient.fullName }}</ion-item>
+      </ion-list>
     </ion-card-content>
   </ion-card>
   <ion-card class="allclients">
@@ -39,7 +44,8 @@
       <br>
       <ion-list class="allclients_clientlist">
         <p>Tap on a client to view details</p>
-        <ion-item (click)="goToClientPage(client)" *ngFor="let client of clients | async">{{ client.fullName }}</ion-item>
+        <ion-item *ngFor="let client of clients | async" (click)="goToClientPage(client)">
+          {{ client.fullName }}</ion-item>
       </ion-list>
     </ion-card-content>
   </ion-card>

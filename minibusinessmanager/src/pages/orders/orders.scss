@@ -3,5 +3,19 @@ page-orders {
 }
 
 .allorders__numorders {
-    color: lightgray;
+    color: gray;
+}
+
+.add-order-btn {
+    width: 80%;
+    display: block;
+    margin: 5px auto;
+}
+
+.currorders_orderlist :nth-child(2n){
+    background: rgb(236, 220, 220);
+}
+
+.allorders_orderlist :nth-child(2n){
+    background: lightgray;
 }

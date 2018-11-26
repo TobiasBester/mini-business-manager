@@ -58,7 +58,8 @@ export class DishesPage {
           type: 'radio',
           label: 'Name',
           value: 'name'
-        },{
+        },
+        {
           type: 'radio',
           label: 'Price',
           value: 'price'

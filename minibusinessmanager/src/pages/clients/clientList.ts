@@ -47,6 +47,10 @@ export class ClientListProvider {
         return this.clientCollection.valueChanges();
     }
 
+    public getClientsWithCurrentOrders() {
+        return this.db.collection<Client>('clients', ref => ref.where('numCurrentOrders','>',0).orderBy('numCurrentOrders')).valueChanges();
+    }
+
     public getClientsForOrders() {
         return this.clientCollection.valueChanges();
     }

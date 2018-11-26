@@ -51,8 +51,11 @@
   <ion-item>
     <h3>Order History</h3>
     <h4>Click on an order to view its details</h4>
+    <p *ngIf="numOrders == 0">No orders associated with this client yet</p>
     <ion-list>
-
+      <p *ngFor="let order of clientOrders | async" (click)="goToOrderPage(order)">
+        {{ order.dateDue }} &nbsp;&nbsp; {{ getOrderItems(order) }}
+      </p>
     </ion-list>
   </ion-item>
 </ion-content>

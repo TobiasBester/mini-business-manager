@@ -21,6 +21,13 @@
   <button *ngIf="!order.completed" ion-button outline icon-end (click)="markAsCompleted()">Mark as Completed
     <ion-icon name="checkmark"></ion-icon>
   </button>
+  <ion-item *ngIf="order.completed">
+    <h1>Completed</h1>
+  </ion-item>
+  <!-- <ion-item *ngIf="!order.completed">
+    <h3>Time remaining</h3>
+    <h2>{{ timeRemaining }}</h2>
+  </ion-item> -->
   <ion-item>
     <h3>Client Name</h3>
     <h2>{{ order.client.fullName }}</h2>
@@ -29,14 +36,9 @@
     <h3>Date Order Was Placed</h3>
     <h2>{{ order.datePlaced.toDate() | date }}</h2>
   </ion-item>
-  <!-- If completed, then show date completed, else show date due -->
-  <ion-item *ngIf="!order.completed" class="order-incomplete">
+  <ion-item class="order-incomplete">
     <h3>Due Date</h3>
     <h2>{{ order.dateDue | date }} at {{ order.timeDue }}</h2>
-  </ion-item>
-  <ion-item *ngIf="order.completed" class="order-complete">
-    <h3>Date Completed</h3>
-    <h2>{{ order.dateCompleted.toDate() | date }}</h2>
   </ion-item>
   <ion-item>
     <h3>Order Items</h3>

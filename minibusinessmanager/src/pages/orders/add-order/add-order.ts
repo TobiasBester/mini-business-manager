@@ -8,6 +8,7 @@ import { ClientListProvider } from '../../clients/clientList';
 import { DishListProvider } from '../../dishes/dish-list';
 import { OrderItem } from '../orderItemObject';
 import { Order } from '../orderObject';
+import { Client } from '../../clients/clientObject';
 
 /**
  * Generated class for the AddOrderPage page.
@@ -186,6 +187,8 @@ export class AddOrderPage {
       notes: this.addOrderForm.controls['notes'].value
     };
 
+    this.updateClientDetails(newOrder.client);
+
     this.ol.addOrder(newOrder)
       .then((response) => {
         this.loader.dismiss();
@@ -198,6 +201,11 @@ export class AddOrderPage {
         this.failureToast.present();
         this.loader.dismiss();
       });
+  }
+
+  updateClientDetails(client: Client) {
+    client.numCurrentOrders++;
+    this.cl.editAttribute(client);
   }
 
   getToday(): Date {

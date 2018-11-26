@@ -17,7 +17,7 @@ export class OrderListProvider {
   // private ordersData: Observable<Order[]>;
 
   constructor(public db: AngularFirestore) {
-    this.orderCollection = db.collection<Order>('orders', ref => ref.orderBy('dateCompleted'));
+    this.orderCollection = db.collection<Order>('orders', ref => ref.orderBy('dateCompleted', 'desc'));
     // this.ordersData = this.orderCollection.valueChanges();
   }
 
@@ -46,6 +46,14 @@ export class OrderListProvider {
 
   public getOrderListData() {
     return this.orderCollection.valueChanges();
+  }
+
+  public getCurrentOrdersList() {
+    return this.db.collection<Order>('orders', ref => ref.orderBy('dateDue').where('completed', '==', false)).valueChanges();
+  }
+
+  public getClientOrderList(clientId) {
+    return this.db.collection<Order>('orders', ref => ref.where('client.id', '==', clientId)).valueChanges();
   }
 
   public removeOrder(order) {

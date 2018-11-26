@@ -2,6 +2,10 @@ page-clients {
 
 }
 
+.currclients_clientlist :nth-child(2n) {
+    background: rgb(240, 224, 224);
+}
+
 .allclients_clientlist :nth-child(2n) {
     background: lightgray;
 }
