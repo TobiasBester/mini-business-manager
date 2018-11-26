@@ -28,7 +28,9 @@
   </button>
   <ion-card class="allorders">
     <ion-card-content>
-      <ion-card-title>Order History</ion-card-title>
+      <ion-card-title>
+        Completed Orders <span class="allorders__numorders">{{ numClients }}</span>
+      </ion-card-title>
       <button ion-button icon-end outline (click)="sortList()">
         Sort
         <ion-icon name="funnel"></ion-icon>
@@ -36,7 +38,10 @@
       <br>
       <ion-list>
         <p>Tap on an order to view details</p>
-        <ion-item></ion-item>
+        <!-- &nbsp;&nbsp;&nbsp;&nbsp;Date Due &nbsp;&nbsp;&nbsp;Client Name -->
+        <ion-item *ngFor="let order of orders | async" (click)="goToOrderPage(order)">
+          {{ order.dateDue }} &nbsp;&nbsp; {{ order.client.fullName }}
+        </ion-item>
       </ion-list>
     </ion-card-content>
   </ion-card>

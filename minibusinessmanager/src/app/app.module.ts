@@ -32,6 +32,7 @@ import { AddPurchaseProvider } from '../pages/purchases/add-purchase';
 import { AddOrderPage } from '../pages/orders/add-order/add-order';
 import { OrderListProvider } from '../pages/orders/order-list';
 import { ClientListProvider } from '../pages/clients/clientList';
+import { SingleOrderPage } from '../pages/orders/single-order/single-order';
 
 @NgModule({
   declarations: [
@@ -49,11 +50,14 @@ import { ClientListProvider } from '../pages/clients/clientList';
     SingleStockPage,
     AddStockPage,
     RecordPurchasePage,
-    AddOrderPage
+    AddOrderPage,
+    SingleOrderPage
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp),
+    IonicModule.forRoot(MyApp, {
+      tabsHideOnSubPages: true
+    }),
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule.enablePersistence()
   ],
@@ -73,7 +77,8 @@ import { ClientListProvider } from '../pages/clients/clientList';
     SingleStockPage,
     AddStockPage,
     RecordPurchasePage,
-    AddOrderPage
+    AddOrderPage,
+    SingleOrderPage
   ],
   providers: [
     StatusBar,

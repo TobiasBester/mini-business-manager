@@ -61,4 +61,18 @@ export class OrderListProvider {
     });
   }
 
+  public editAttribute(order) {
+    return new Promise<any>((resolve, reject) => {
+      this.orderCollection.doc<Order>(order.id).update(order)
+      .then((response) => {
+        console.log('Order Provider: Edit Attribute\n' + response);
+        resolve(response);
+      },
+      (error) => {
+        console.log(error);
+        reject(error);
+      });
+    });
+  }
+
 }

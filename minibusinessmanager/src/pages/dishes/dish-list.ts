@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
 import { Dish } from './dishObject';
-import { Observable } from 'rxjs';
+// import { Observable } from 'rxjs';
 
 /*
   Generated class for the DishListProvider provider.

@@ -1,0 +1,52 @@
+<!--
+  Generated template for the SingleOrderPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title> Order Details </ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="removeOrder()">
+        <ion-icon name="trash"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content padding>
+  <button *ngIf="!order.completed" ion-button outline icon-end (click)="markAsCompleted()">Mark as Completed
+    <ion-icon name="checkmark"></ion-icon>
+  </button>
+  <ion-item>
+    <h3>Client Name</h3>
+    <h2>{{ order.client.fullName }}</h2>
+  </ion-item>
+  <ion-item>
+    <h3>Date Order Was Placed</h3>
+    <h2>{{ order.datePlaced.toDate() | date }}</h2>
+  </ion-item>
+  <!-- If completed, then show date completed, else show date due -->
+  <ion-item *ngIf="!order.completed" class="order-incomplete">
+    <h3>Due Date</h3>
+    <h2>{{ order.dateDue | date }} at {{ order.timeDue }}</h2>
+  </ion-item>
+  <ion-item *ngIf="order.completed" class="order-complete">
+    <h3>Date Completed</h3>
+    <h2>{{ order.dateCompleted.toDate() | date }}</h2>
+  </ion-item>
+  <ion-item>
+    <h3>Order Items</h3>
+    <div *ngFor="let i of order.orderItems">
+      - {{ i.dish.name }}&nbsp;&nbsp;&nbsp;x{{ i.quantity }} 
+    </div>
+    <b>Total Cost: {{ order.totalCost | currency:'ZAR' }}</b>
+  </ion-item>
+  <ion-item>
+    <h3>Notes</h3>
+    <h2>{{ order.notes }}</h2>
+  </ion-item>
+</ion-content>
