@@ -33,6 +33,7 @@ import { AddOrderPage } from '../pages/orders/add-order/add-order';
 import { OrderListProvider } from '../pages/orders/order-list';
 import { ClientListProvider } from '../pages/clients/clientList';
 import { SingleOrderPage } from '../pages/orders/single-order/single-order';
+import { DashboardPage } from '../pages/dashboard/dashboard';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import { SingleOrderPage } from '../pages/orders/single-order/single-order';
     AddStockPage,
     RecordPurchasePage,
     AddOrderPage,
-    SingleOrderPage
+    SingleOrderPage,
+    DashboardPage
   ],
   imports: [
     BrowserModule,
@@ -78,7 +80,8 @@ import { SingleOrderPage } from '../pages/orders/single-order/single-order';
     AddStockPage,
     RecordPurchasePage,
     AddOrderPage,
-    SingleOrderPage
+    SingleOrderPage,
+    DashboardPage
   ],
   providers: [
     StatusBar,
