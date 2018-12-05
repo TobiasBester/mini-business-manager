@@ -47,7 +47,11 @@ export class PurchaseListProvider {
   }
 
   public getStockPurchases() {
-    return this.db.collection<Purchase>('purchases', ref => ref.where('type', '==', 'stock'));
+    return this.db.collection<Purchase>('purchases', ref => ref.where('type', '==', 'stock')).valueChanges();
+  }
+
+  public getStockPurchaseHistory(stockID) {
+    return this.db.collection<Purchase>('purchases', ref => ref.where('item.id','==',stockID)).valueChanges();
   }
 
   public removePurchase(purchase) {

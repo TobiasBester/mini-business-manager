@@ -37,6 +37,9 @@
   </ion-card>
   <h4>Purchase History</h4>
   <ion-list>
-    <ion-item>Feature coming soon</ion-item>
+    <p *ngIf="numPurchases == 0">No purchase history for this stock item</p>
+    <p *ngFor="let purchase of purchaseData | async">
+      {{ purchase.date | date }} &nbsp;&nbsp; x{{ purchase.amount }} &nbsp;&nbsp; {{ purchase.totalCost | currency:'ZAR' }}
+    </p>
   </ion-list>
 </ion-content>

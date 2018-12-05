@@ -1,3 +1,26 @@
 page-home {
 
 }
+
+.newbuttons {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.newbuttons__single {
+    width: 45%;
+    padding: 30px 20px;
+    white-space: normal;
+}
+
+.newbuttons__order {
+    width: 95%;
+    padding: 30px 20px;
+}
+
+.newbuttons__dashboard {
+    width: 95%;
+    padding: 30px 20px;
+}

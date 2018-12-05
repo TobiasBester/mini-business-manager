@@ -94,7 +94,7 @@ export class AddOrderPage {
 
     this.dishData = this.dl.getDishesForOrders();
     this.dishProviderSub = this.dishData.subscribe((data) => {
-      console.log(data);
+      // console.log(data);
     }, (error) => {
       console.log(error);
       this.dishFailureToast.present();

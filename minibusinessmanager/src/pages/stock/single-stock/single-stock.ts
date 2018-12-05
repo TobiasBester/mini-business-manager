@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, ToastController, AlertController } from 'ionic-angular';
+import { NavController, NavParams, ToastController, AlertController, LoadingController } from 'ionic-angular';
 import { StockListProvider } from '../stock-list';
 import { Stock } from '../stockObject';
+import { Observable } from 'rxjs';
+import { PurchaseListProvider } from '../../purchases/purchase-list';
 
 /**
  * Generated class for the SingleStockPage page.
@@ -19,6 +21,10 @@ export class SingleStockPage {
   public stockItem: Stock;
   public quantity: number;
   public tempQuantity: number;
+
+  public purchaseData: Observable<any[]>;
+  public numPurchases = 0;
+
   public successToast = this.toastController.create({
     message: 'Successfully updated quantity',
     duration: 2000
@@ -31,16 +37,39 @@ export class SingleStockPage {
     message: 'Failed to remove stock item. Please try again',
     duration: 2000
   });
+  public loadFailToast = this.toastController.create({
+    message: 'Could not get purchase history',
+    duration: 2000
+  });
+  public loader = this.lc.create({
+    content: 'Fetching purchase history',
+    spinner: 'crescent'
+  });
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public toastController: ToastController,
-    public sl: StockListProvider, public alertCtrl: AlertController) {
+  constructor(
+    public navCtrl: NavController, 
+    public navParams: NavParams, 
+    public toastController: ToastController,
+    public lc: LoadingController,
+    public sl: StockListProvider, 
+    public alertCtrl: AlertController,
+    public pl: PurchaseListProvider) {
       this.stockItem = navParams.get('stock');
       this.quantity = this.stockItem.quantity;
       this.tempQuantity = this.stockItem.quantity;
+
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad SingleStockPage');
+    this.loader.present();
+    this.purchaseData = this.pl.getStockPurchaseHistory(this.stockItem.id);
+    this.purchaseData.subscribe((data) => {
+      this.numPurchases = data.length;
+      this.loader.dismiss();
+    }, (error) => {
+      console.log('Error: ' + error);
+      this.loadFailToast.present();
+    });
   }
 
   decQ() {

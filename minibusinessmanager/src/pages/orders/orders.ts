@@ -42,7 +42,6 @@ export class OrdersPage {
   }
 
   ionViewDidLoad() {
-    console.log('Orders did load');
     this.loader.present();
     this.orders = this.ol.getOrderListData();
     this.currentOrders = this.ol.getCurrentOrdersList();

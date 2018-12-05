@@ -3,22 +3,44 @@
       <button ion-button menuToggle>
         <ion-icon name="menu"></ion-icon>
       </button>
-    <ion-title>Home</ion-title>
+    <ion-title>mini business manager</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  <h2>Welcome to Ionic!</h2>
-  <p>
-    This starter project comes with simple tabs-based layout for apps
-    that are going to primarily use a Tabbed UI.
-  </p>
-  <p>
-    Take a look at the <code>src/pages/</code> directory to add or change tabs,
-    update any existing page or create new pages.
-  </p>
-  <p>
-    This paragraph was added and contains the string {{ addedString }}.
-  </p>
-  <button ion-button full color="secondary" (click)='updateAddedString()'>CLick me please!</button>
+  <h2>Hello there!</h2>
+  <h3>Today is {{ currentDate | date:'fullDate' }}</h3>
+
+  <ion-card class="currentorders">
+    <ion-card-header>
+      Orders Currently Due
+    </ion-card-header>
+    <ion-card-content>
+      <!-- <h3>Tap on an order to view details</h3> -->
+      <p *ngIf="numCurrentOrders == 0">No orders currently due</p>
+      <ion-list>
+        <ion-card *ngFor="let order of currentOrders | async" (click)="goToOrderPage(order)">
+          <ion-card-content>
+            Due: {{ order.dateDue | date:'mediumDate' }} &nbsp;&nbsp; Client: {{ order.client.fullName }}
+          </ion-card-content>
+        </ion-card>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+
+  <div class="newbuttons">
+    <button class="newbuttons__order" ion-button outline icon-end (click)="goToPage('addorder')">
+      Record New Order
+      <ion-icon name="add-circle"></ion-icon>
+    </button>
+    <button class="newbuttons__single" ion-button (click)="goToPage('addclient')">Add New Client</button>
+    <button class="newbuttons__single" ion-button (click)="goToPage('adddish')">Add New Dish</button>
+    <button class="newbuttons__single" ion-button (click)="goToPage('addstock')">Add New Stock Item</button>
+    <button class="newbuttons__single" ion-button (click)="goToPage('addpurchase')">Record Stock Item Purchase</button>
+    <button class="newbuttons__dashboard" ion-button outline icon-end (click)="goToPage('dashboard')">
+      Business Dashboard
+      <ion-icon name="stats"></ion-icon>
+    </button>
+  </div>
+  
 </ion-content>
